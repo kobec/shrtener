@@ -2,25 +2,22 @@
 
 declare(strict_types=1);
 
-namespace App\Model\User\Entity\User;
+namespace App\Model\User\Entity\User\Url;
 
 use Webmozart\Assert\Assert;
 
 /**
- * Class UserUrl
- * @package App\Model\User\Entity\User
+ * Class Country
+ * @package App\Model\User\Entity\User\Url
  */
-class UserUrl
+class Country
 {
     private $value;
 
     public function __construct(string $value)
     {
         Assert::notEmpty($value);
-        if (!filter_var($value, FILTER_VALIDATE_URL)) {
-            throw new \InvalidArgumentException('Incorrect user url.');
-        }
-        $this->value = mb_strtolower($value);
+        $this->value = $value;
     }
 
     public function getValue(): string

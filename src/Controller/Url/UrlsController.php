@@ -4,19 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller\Url;
 
-use App\Model\User\Entity\User\User;
-use App\Model\User\UseCase\Activate;
-use App\Model\User\UseCase\Block;
-use App\Model\User\UseCase\Create;
-use App\Model\User\UseCase\Edit;
-use App\Model\User\UseCase\Role;
-use App\Model\User\UseCase\SignUp\Confirm;
+use App\Model\User\Entity\User\UserId;
 use App\Model\User\UseCase\Url\Create\Dto;
 use App\Model\User\UseCase\Url\Create\Form;
 use App\Model\User\UseCase\Url\Create\Handler;
-use App\ReadModel\User\Filter;
-use App\ReadModel\User\UserFetcher;
-use App\ReadModel\Work\Members\Member\MemberFetcher;
+use App\ReadModel\User\Url\UrlFetcher;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,35 +27,36 @@ class UrlsController extends AbstractController
 
     private $logger;
 
+    /**
+     * UrlsController constructor.
+     * @param LoggerInterface $logger
+     */
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
     /**
-     * @Route("", name="")
+     * @Route("/my", name=".my")
      * @param Request $request
-     * @param UserFetcher $fetcher
+     * @param UrlFetcher $fetcher
      * @return Response
      */
-    public function index(Request $request/*, UserFetcher $fetcher*/): Response
+    public function index(Request $request, UrlFetcher $fetcher, UserInterface $user): Response
     {
-        /*$filter = new Filter\Filter();
-
-        $form = $this->createForm(Filter\Form::class, $filter);
-        $form->handleRequest($request);
-
+        //prepare all needed data from front end
+        $userId = new UserId($user->getId());
+        //use UrlFetcher service to get all data
         $pagination = $fetcher->all(
-            $filter,
+            $userId,
             $request->query->getInt('page', 1),
             self::PER_PAGE,
-            $request->query->get('sort', 'date'),
+            $request->query->get('sort', 'id'),
             $request->query->get('direction', 'desc')
-        );*/
+        );
 
         return $this->render('user/url/index.html.twig', [
-           /* 'pagination' => $pagination,
-            'form' => $form->createView(),*/
+            'pagination' => $pagination
         ]);
     }
 
@@ -84,7 +77,7 @@ class UrlsController extends AbstractController
             try {
                 //pass recently collected data to the create url service
                 $handler->handle($dto);
-                return $this->redirectToRoute('url');
+                return $this->redirectToRoute('url.my');
             } catch (\DomainException $e) {
                 $this->logger->warning($e->getMessage(), ['exception' => $e]);
                 $this->addFlash('error', $e->getMessage());

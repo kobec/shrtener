@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace App\Model\User\Entity\User;
+namespace App\Model\User\Entity\User\Url;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
 /**
- * Class UserUrlType
- * @package App\Model\User\Entity\User
+ * Class CountryType
+ * @package App\Model\User\Entity\User\Url
  */
-class UserUrlType extends StringType
+class CountryType extends StringType
 {
-    public const NAME = 'user_url';
+    public const NAME = 'user_url_log_country';
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return $value instanceof UserUrl ? $value->getValue() : $value;
+        return $value instanceof Country ? $value->getValue() : $value;
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return !empty($value) ? new UserUrl($value) : null;
+        return !empty($value) ? new Country($value) : null;
     }
 
     public function getName(): string

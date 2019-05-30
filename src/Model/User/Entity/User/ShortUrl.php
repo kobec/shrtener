@@ -6,6 +6,10 @@ namespace App\Model\User\Entity\User;
 
 use Webmozart\Assert\Assert;
 
+/**
+ * Class ShortUrl
+ * @package App\Model\User\Entity\User
+ */
 class ShortUrl
 {
     private $value;

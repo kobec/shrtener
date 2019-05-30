@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Model\User\Entity\User;
 
-use Ramsey\Uuid\Uuid;
 use Webmozart\Assert\Assert;
 
+/**
+ * Class Id
+ * @package App\Model\User\Entity\User
+ */
 class Id
 {
     private $value;

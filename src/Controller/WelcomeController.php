@@ -7,6 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class WelcomeController
+ * @package App\Controller
+ */
 class WelcomeController extends AbstractController
 {
     /**
@@ -14,7 +18,6 @@ class WelcomeController extends AbstractController
      */
     public function index(Request $request):Response
     {
-        //die('wefwe');
         return $this->render('welcome/index.html.twig', [
             'controller_name' => 'WelcomeController',
         ]);

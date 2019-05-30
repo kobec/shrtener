@@ -6,6 +6,10 @@ namespace App\Model;
 
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Class Flusher
+ * @package App\Model
+ */
 class Flusher
 {
     private $em;

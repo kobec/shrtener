@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 namespace App\Model\User\UseCase\Url\Shortener;
-
+/**
+ * Class Dto
+ * @package App\Model\User\UseCase\Url\Shortener
+ */
 class Dto
 {
     /**

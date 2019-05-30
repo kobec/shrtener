@@ -42,6 +42,9 @@
                         <a class="nav-link" href="{{ path('url.create') }}">Create Url</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('url.my') }}">My Url</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout') }}">LogOut</a>
                     </li>
                 {% else %}
@@ -64,6 +67,7 @@
 <!-- Begin page content -->
 <main role="main" class="flex-shrink-0">
     <div class="container">
+        <div style="clear: both;margin-top: 50px">&nbsp;</div>
         {% block breadcrumbs %}{% endblock %}
         <div class="container-fluid">
             {% block body %}{% endblock %}

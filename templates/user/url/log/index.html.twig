@@ -5,7 +5,8 @@
 {% block breadcrumbs %}
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ path('welcome') }}">Home</a></li>
-        <li class="breadcrumb-item active">Urls</li>
+        <li class="breadcrumb-item"><a href="{{ path('url.my') }}">My Urls</a></li>
+        <li class="breadcrumb-item active">{{ title }}</li>
     </ol>
 {% endblock %}
 
@@ -39,26 +40,20 @@
             <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'id', 'id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'user_url', 'user_url') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'short_url', 'short_url') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'expires', 'expires') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'ip', 'ip') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'browser', 'browser') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'country', 'country') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'created_at', 'created_at') }}</th>
             </tr>
             </thead>
             <tbody>
-            {% for user_url in pagination %}
+            {% for user_url_log in pagination %}
                 <tr>
-                    <td>{{ user_url.id }}</td>
-{#
-                    <td><a href="{{ path('users.show', {'id': user.id}) }}">{{ user.name }}</a></td>
-#}
-                    <td>{{ user_url.user_url }}</td>
-                    <td><a target="_blank" href="{{ absolute_url(path('shortener', {'shortUrl': user_url.short_url})) }}">{{ absolute_url(path('shortener', {'shortUrl': user_url.short_url})) }}</a></td>
-                    <td>{{ user_url.expires }}</td>
-                    <td>{{ user_url.created_at }}</td>
-                    <td><a href="{{ path('url.log.list', {'id': user_url.id}) }}">View Statistics</a></td>
-
-
+                    <td>{{ user_url_log.id }}</td>
+                    <td>{{ user_url_log.ip }}</td>
+                    <td>{{ user_url_log.browser }}</td>
+                    <td>{{ user_url_log.country }}</td>
+                    <td>{{ user_url_log.created_at }}</td>
                 </tr>
             {% endfor %}
             </tbody>

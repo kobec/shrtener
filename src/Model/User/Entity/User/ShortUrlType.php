@@ -7,6 +7,10 @@ namespace App\Model\User\Entity\User;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
+/**
+ * Class ShortUrlType
+ * @package App\Model\User\Entity\User
+ */
 class ShortUrlType extends StringType
 {
     public const NAME = 'short_url';

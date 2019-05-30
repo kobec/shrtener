@@ -24,11 +24,16 @@ services:
     App\Model\User\UseCase\Url\Create\Handler:
         arguments:
           $interval: 'P1Y'
-
+    App\Model\User\Entity\User\UserRepository: ~
+    App\Model\User\Service\UserRequestData: ~
     App\Model\User\Service\Interfaces\ShortenerInterface: '@App\Model\User\Service\Shortener'
+    App\Model\User\Service\Interfaces\UserRequestDataInterface: '@App\Model\User\Service\UserRequestData'
     App\Model\User\Entity\User\Repository\UserRepository: ~
     App\Model\User\Entity\User\Repository\UrlRepository: ~
     App\Model\User\Entity\User\Repository\Interfaces\UrlRepositoryInterface: '@App\Model\User\Entity\User\Repository\UrlRepository'
+    App\Model\User\Entity\User\Repository\UrlLogRepository: ~
+    App\Model\User\Entity\User\Repository\Interfaces\UrlLogRepositoryInterface: '@App\Model\User\Entity\User\Repository\UrlLogRepository'
+    Victorybiz\GeoIPLocation\GeoIPLocation: ~
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class

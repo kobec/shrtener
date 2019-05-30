@@ -12,6 +12,9 @@ doctrine:
         types:
               user_url: 'App\Model\User\Entity\User\UserUrlType'
               short_url: 'App\Model\User\Entity\User\ShortUrlType'
+              user_url_log_ip: 'App\Model\User\Entity\User\Url\IpType'
+              user_url_log_browser: 'App\Model\User\Entity\User\Url\BrowserType'
+              user_url_log_country: 'App\Model\User\Entity\User\Url\CountryType'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -29,9 +32,3 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Model/User/Entity/User'
                 prefix: 'App\Model\User\Entity\User'
                 alias: Url
-            Test:
-                            is_bundle: false
-                            type: annotation
-                            dir: '%kernel.project_dir%/src/Model/User/Entity/User'
-                            prefix: 'App\Entity\Test'
-                            alias: Test

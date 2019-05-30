@@ -9,13 +9,11 @@ use App\Model\User\Entity\User\UserId;
 use App\Model\User\Entity\User\UserUrl;
 
 
-interface UrlRepositoryInterface
+interface UrlLogRepositoryInterface
 {
-    public function hasByUserIdAndUrl(UserId $userId, UserUrl $userUrl): bool;
+    public function add(Url\Log $log): void;
 
-    public function add(Url $url): void;
-
-    public function remove(Url $url): void;
+    public function remove(Url\Log $log): void;
 
     public function get(Id $id): Url;
 

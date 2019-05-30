@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Model\User\Entity\User;
+namespace App\Model\User\Entity\User\Url;
 
+use App\Model\User\Entity\User\Url;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="user_url")
+ * @ORM\Table(name="user_url_log")
  */
-class Url
+class Log
 {
     /**
      * @ORM\Id()
@@ -22,29 +23,29 @@ class Url
     private $id;
 
     /**
-     * @var User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="users")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @var Url
+     * @ORM\ManyToOne(targetEntity="App\Model\User\Entity\User\Url", inversedBy="logs")
+     * @ORM\JoinColumn(name="user_url_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    private $user;
-
-
-    /**
-     * @var string
-     * @ORM\Column(type="user_url",length=2083, nullable=false)
-     */
-    private $userUrl;
+    private $url;
 
     /**
      * @var string
-     * @ORM\Column(type="short_url",length=32, nullable=true)
+     * @ORM\Column(type="user_url_log_ip",length=32, nullable=true)
      */
-    private $shortUrl;
+    private $ip;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @var string
+     * @ORM\Column(type="user_url_log_browser",length=255, nullable=true)
      */
-    private $expires;
+    private $browser;
+
+    /**
+     * @var string
+     * @ORM\Column(type="user_url_log_country",length=255, nullable=true)
+     */
+    private $country;
 
     /**
      * @var DateTime $created
@@ -61,17 +62,14 @@ class Url
     protected $updatedAt;
 
 
-    public function __construct(User $user, UserUrl $urlUrl, \DateTimeImmutable $expires)
+    public function __construct(Url $url, Ip $ip, Browser $browser, Country $country)
     {
-        $this->user = $user;
-        $this->userUrl = $urlUrl;
-        $this->expires = $expires;
+        $this->url = $url;
+        $this->ip = $ip;
+        $this->browser = $browser;
+        $this->country = $country;
     }
 
-    public function getUserUrl()
-    {
-        return $this->userUrl;
-    }
 
     /**
      * @ORM\PrePersist
@@ -102,17 +100,6 @@ class Url
         return $this;
     }
 
-    public function getShortUrl(): ?ShortUrl
-    {
-        return $this->shortUrl;
-    }
-
-    public function setShortUrl(ShortUrl $shortUrl): self
-    {
-        $this->shortUrl = $shortUrl;
-        return $this;
-    }
-
     public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
@@ -122,10 +109,5 @@ class Url
     {
         $this->updatedAt = $updatedAt;
         return $this;
-    }
-
-    public function isExpiredTo(\DateTimeImmutable $date): bool
-    {
-        return $this->expires <= $date;
     }
 }

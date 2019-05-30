@@ -7,6 +7,10 @@ namespace App\Model\User\Entity\User;
 use Ramsey\Uuid\Uuid;
 use Webmozart\Assert\Assert;
 
+/**
+ * Class UserId
+ * @package App\Model\User\Entity\User
+ */
 class UserId
 {
     private $value;

@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Post{% endblock %}
+{% block title %}New Url{% endblock %}
 
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('welcome') }}">Home</a></li>
+        <li class="breadcrumb-item active">Create new Url</li>
+    </ol>
+{% endblock %}
 {% block body %}
-    <h1>Create new Post</h1>
+    <h1>Create new Url</h1>
 
     {{ include('user/url/_form.html.twig') }}
 
